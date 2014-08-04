@@ -22,8 +22,19 @@ library(ggplot2)
 png(file = "plot6.png", width=550, height=650)
 ggplot(both_EMI, aes(x = factor(year), y = Emissions)) +
   geom_bar(stat="identity", aes(fill = Country)) + 
-  facet_grid(Country  ~ ., scales="free") +
+  facet_grid(. ~ Country, scales="free") +
   geom_text(mapping = aes(label = round(Emissions)), vjust=-.25, size = 4) +
+  xlab("Year") +
+  ylab(expression("Total PM"[2.5]*" Emission")) +
+  ggtitle(expression("PM"[2.5]*" from motor vehicle sources in baltimore"))
+dev.off()
+
+## or put bars in the same graph
+png(file = "plot6b.png", width=550, height=650)
+ggplot(both_EMI, aes(x = factor(year), y = Emissions, fill = Country, ymax = 4650)) +
+  geom_bar(stat="identity", position="dodge") + 
+  geom_text(mapping = aes(label = round(Emissions)), position=position_dodge(width = 0.9), vjust=-.25, size = 4) +
+  ## width einai to platos metaksi twn 2 noumerwn
   xlab("Year") +
   ylab(expression("Total PM"[2.5]*" Emission")) +
   ggtitle(expression("PM"[2.5]*" from motor vehicle sources in baltimore"))

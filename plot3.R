@@ -27,5 +27,16 @@ ggplot(sum_bemissions_yt, aes(x = factor(year), y=Emissions)) +
 dev.off()
 
 
+## or put bars in the same graph
+png(file = "plot3b.png", width=550, height=650)
+ggplot(sum_bemissions_yt, aes(x = factor(year), y = Emissions, fill = type, ymax = 2150)) +
+  geom_bar(stat="identity", position = "dodge") + 
+  geom_text(mapping = aes(label = round(Emissions)), position=position_dodge(width = 0.9), vjust=-.25, size = 4) +
+  ## width einai to platos metaksi twn 2 noumerwn
+  xlab("Year") +
+  ylab(expression("Total PM"[2.5]*" Emission")) +
+  ggtitle(expression("PM"[2.5]*" emissions in Baltimore City by source types"))
+dev.off()
+
 
 
